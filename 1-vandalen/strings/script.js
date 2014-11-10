@@ -1,14 +1,28 @@
 "use strict";
 
-window.onload = function(){
+window.onload = function() {
 
 	// I denna funktion ska du skriva koden för att hantera "spelet"
-	var convertString = function(str){
+	var convertString = function(str) {
 		// Plats för förändring.		
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-	
 
+		if (str === "") {
+			console.log("Du måste skriva någon text"); // If no text give error message
+		}
+
+		else if (str == str.toLowerCase()) {     //trying to make 
+			var newStr = str.toUpperCase();
+		}
+
+		else if (str == str.toUpperCase()) {
+			newStr = str.toLowerCase();
+		}
+		
+		newStr == newStr.replace();
+
+		return newStr;
 
 
 
@@ -24,19 +38,20 @@ window.onload = function(){
 	var submit = document.querySelector("#send");
 
 	// Vi kopplar en eventhanterare till formulärets skickaknapp som kör en anonym funktion.
-	submit.addEventListener("click", function(e){
+	submit.addEventListener("click", function(e) {
 		e.preventDefault(); // Hindra formuläret från att skickas till servern. Vi hanterar allt på klienten.
 
-		p.classList.remove( "error");
+		p.classList.remove("error");
 
 		try {
 			var answer = convertString(input.value) // Läser in texten från textrutan och skickar till funktionen "convertString"
-			p.innerHTML = answer;		// Skriver ut texten från arrayen som skapats i funktionen.	
-		} catch (error){
-			p.classList.add( "error"); // Växla CSS-klass, IE10+
+			p.innerHTML = answer; // Skriver ut texten från arrayen som skapats i funktionen.	
+		}
+		catch (error) {
+			p.classList.add("error"); // Växla CSS-klass, IE10+
 			p.innerHTML = error.message;
 		}
-	
+
 	});
 
 
