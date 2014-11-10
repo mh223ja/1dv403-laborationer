@@ -1,39 +1,35 @@
 "use strict";
 
 window.onload = function() {
+var secret = Math.floor((Math.random() * 100) + 1);
+var numberOfGuesses = 0;
 
-	var secret = Math.floor((Math.random() * 100) + 1);
-	var numberOfGuesses = 0;
+// I denna funktion ska du skriva koden för att hantera "spelet"
+var guess = function(number) {
+	console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
+	console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
 
-	// Detta tal behöver bytas ut mot ett slumpat tal.
+	numberOfGuesses += 1;
 
-	// I denna funktion ska du skriva koden för att hantera "spelet"
-	var guess = function(number) {
-		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
-		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
-		
-		numberOfGuesses +=1;
-		
-		if (number == secret) {
-			return [true, "Grattis! Du gissade rätt. Det hemliga talet var:" + secret + "och du behövde" + numberOfGuesses + "gissningar"];
-		}
-		
-		if (number < secret){
+	if (number < 1 || number > 100) {
+		return [false, "FEL! Du måste ange ett nummber mellan 1 och 100"];
+	}
+
+	else if (number == secret) {
+		return [true, "Grattis! Du gissade rätt. Det hemliga talet var: " + secret + " och du behövde " + numberOfGuesses + " gissningar"];
+	}
+
+	else if (number < secret) {
 		return [false, "Det hemliga talet är högre."];
 	}
 
-	   if (number > secret) {
+	else if (number > secret) {
 		return [false, "Det hemliga talet är mindre."];
 	}
-	   if (number < 1 || number > 100)
-	   {
-	   	return [false, "FEL! Du måste ange ett nummber mellan 1 och 100"];
-	   }
+
 };
 
 // ------------------------------------------------------------------------------
-
-
 
 // Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
