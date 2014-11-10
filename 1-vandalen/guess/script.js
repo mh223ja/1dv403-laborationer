@@ -2,7 +2,8 @@
 
 window.onload = function() {
 
-	var secret = Math.floor(Math.random() * (100 - 1)) ;
+	var secret = Math.floor((Math.random() * 100) + 1);
+	var numberOfGuesses = 0;
 
 	// Detta tal behöver bytas ut mot ett slumpat tal.
 
@@ -10,47 +11,24 @@ window.onload = function() {
 	var guess = function(number) {
 		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
 		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
-
-	
-
-		if (isNaN(number)) {
-			throw new Error("FEL! Nummer måste vara mellan 1 och 100");
-		}
-
-
-		else if(number === secret) {
-			return [true, "Grattis! Du gissade rätt. Det hemliga talet var" + secret];
+		
+		numberOfGuesses +=1;
+		
+		if (number == secret) {
+			return [true, "Grattis! Du gissade rätt. Det hemliga talet var:" + secret + "och du behövde" + numberOfGuesses + "gissningar"];
 		}
 		
-		else if(number < secret){
-
+		if (number < secret){
 		return [false, "Det hemliga talet är högre."];
-
-
 	}
 
-	else if (number > secret) {
+	   if (number > secret) {
 		return [false, "Det hemliga talet är mindre."];
-
 	}
-	else if (number < 1 || number > 100) {
-		 return [false, "Det hemliga talet måste vara mellan 1 och 100"];
-		}
-
-	else if (isNaN(number)) {
-			return [false,"Ange ett nummer mellan 1 och 100"];
-		}
-
-	// Plats för förändring.
-
-
-
-
-	// Returnera exempelvis: 
-	// [true, "Grattis du vann! Det hemliga talet var X och du behövde Y gissningar för att hitta det."]
-	// [false, "Det hemliga talet är högre!"]
-	// [false, "Det hemliga talet är lägre!"]
-	// [false, "Talet är utanför intervallet 0 - 100"]		
+	   if (number < 1 || number > 100)
+	   {
+	   	return [false, "FEL! Du måste ange ett nummber mellan 1 och 100"];
+	   }
 };
 
 // ------------------------------------------------------------------------------
