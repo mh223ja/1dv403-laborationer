@@ -7,27 +7,32 @@ window.onload = function() {
 		// Plats för förändring.		
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-
 		if (str === "") {
-			console.log("Du måste skriva någon text"); // If no text give error message
+			var errorMessage = "FEL! DU MÅSTE SKRIVA NÅGOT"
+			return errorMessage;
 		}
 
-		else if (str == str.toLowerCase()) {     //trying to make 
-			var newStr = str.toUpperCase();
+		else {
+
+			var newStr = "";
+
+			{
+				for (var i = 0; i <= str.length; i++) {
+					var strLine = str.charAt(i);
+
+					if (strLine == strLine.toLowerCase()) { //trying to make lower case upper 
+						strLine = strLine.toUpperCase();
+						newStr += strLine;
+					}
+					else if (strLine == strLine.toUpperCase()) { //make uppercase, lower
+						strLine = strLine.toLowerCase();
+						newStr += strLine;
+					}
+					newStr = newStr.replace(/[Aa]/g, "#");
+				}
+				return newStr;
+			}
 		}
-
-		else if (str == str.toUpperCase()) {
-			newStr = str.toLowerCase();
-		}
-		
-		newStr == newStr.replace();
-
-		return newStr;
-
-
-
-
-
 	};
 	// ------------------------------------------------------------------------------
 
@@ -53,7 +58,4 @@ window.onload = function() {
 		}
 
 	});
-
-
-
 };
