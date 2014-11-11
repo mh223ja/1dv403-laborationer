@@ -5,12 +5,25 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
-
+		var dateOfBirth = new Date(date);
+		var todaysDate = new Date();
+		var daysLeft;
+		
+		if (isNaN(dateOfBirth)){
+			throw new Error("FEL! Du måste skriva datum på rätt format") //if not right format, throw exception
+		}
+		
+		if (todaysDate.getTime() > dateOfBirth.getTime()){
+			
+			
+		}
+		
+		else if (todaysDate.getTime() < dateOfBirth.getTime())
+		
+		//how many days left until birthday
+          var day = todaysDate.getDate() - 
 
 			// Din kod här.
-
-
-
 
 	};
 	// ------------------------------------------------------------------------------
