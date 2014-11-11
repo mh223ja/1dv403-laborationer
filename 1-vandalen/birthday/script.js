@@ -7,21 +7,31 @@ window.onload = function(){
 		
 		var dateOfBirth = new Date(date);
 		var todaysDate = new Date();
+		var oneDay = 24*60*60*1000;
 		var daysLeft;
 		
 		if (isNaN(dateOfBirth)){
 			throw new Error("FEL! Du måste skriva datum på rätt format") //if not right format, throw exception
 		}
 		
-		if (todaysDate.getTime() > dateOfBirth.getTime()){
-			
-			
+		if (todaysDate.getTime() > dateOfBirth.getTime()){ //compares dates
+			dateOfBirth.setFullYear(todaysDate.getFullYear()); //puts birthday into current year
+			daysLeft = Math.floor((dateOfBirth - todaysDate) / (oneDay)); //calculates days left by subtracting and dividing by miliseconds to calculate number of daye
 		}
 		
-		else if (todaysDate.getTime() < dateOfBirth.getTime())
+		else if (todaysDate.getTime() < dateOfBirth.getTime()){ //birthday has already past
+		        dateOfBirth.setFullYear(todaysDate.getFullYear() + 1); //calculates until birthday in 2015
+		          daysLeft = Math.floor((dateOfBirth - todaysDate) / (oneDay));
+		}
 		
-		//how many days left until birthday
-          var day = todaysDate.getDate() - 
+	
+		
+		if (daysLeft === 0){
+                       console.log("Happy Birthday!")
+			
+		}
+		return daysLeft;
+	
 
 			// Din kod här.
 
