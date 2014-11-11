@@ -14,18 +14,17 @@ window.onload = function(){
 			throw new Error("FEL! Du måste skriva datum på rätt format") //if not right format, throw exception
 		}
 		
-		if (todaysDate.getTime() > dateOfBirth.getTime()){ //compares dates
+		if (todaysDate.getTime() < dateOfBirth.getTime()){ //compares dates
 			dateOfBirth.setFullYear(todaysDate.getFullYear()); //puts birthday into current year
-			daysLeft = Math.floor((dateOfBirth - todaysDate) / (oneDay)); //calculates days left by subtracting and dividing by miliseconds to calculate number of daye
+			//calculates days left by subtracting and dividing by miliseconds to calculate number of daye
 		}
 		
-		else if (todaysDate.getTime() < dateOfBirth.getTime()){ //birthday has already past
-		        dateOfBirth.setFullYear(todaysDate.getFullYear() + 1); //calculates until birthday in 2015
-		          daysLeft = Math.floor((dateOfBirth - todaysDate) / (oneDay));
+		if (todaysDate > dateOfBirth){ //birthday has already past
+		        dateOfBirth.setFullYear(todaysDate.getFullYear()+1); //calculates until birthday in 2015
+		         
 		}
 		
-	
-		
+	    daysLeft = Math.floor((dateOfBirth - todaysDate) / (oneDay));
 		if (daysLeft === 0){
                        console.log("Happy Birthday!")
 			
