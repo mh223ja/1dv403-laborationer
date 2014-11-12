@@ -4,20 +4,20 @@ var makePerson = function(persArr) {
 
     var name ="";
     var age = 0;
-    var names = []; //variables as arrays
+    var nameArray = []; //variables as arrays
     var ages = [];
     var ageTotal = 0;
     var maxAge;
     var minAge;
-    var avgAge;
+    var averageAge;
     var nameString ="";
-    var resultString ="";
+    var names ="";
     
     
 
     for (var i = 0; i < persArr.length; i++) { 
     //set arrays for name and age
-        names [i] = persArr[i].name; 
+        nameArray [i] = persArr[i].name; 
         ages [i] = persArr[i].age;
         ageTotal += ages[i];
       
@@ -29,19 +29,23 @@ var makePerson = function(persArr) {
 
     minAge = ages[ 0 ];
 
-    avgAge = Math.round(ageTotal / ages.length);
+    averageAge = Math.round(ageTotal / ages.length);
+   
+   nameArray.sort(function(a,b)
+   {
+       return a.localeCompare(b, 'sv');
+   });
+
+    name = nameArray.toString();
    
 
-    name = names.toString();
-   
-
-    resultString = name.split(",").join(", ");
+    names = name.split(",").join(", ");
 
     return {
         minAge: minAge,
         maxAge: maxAge,
-        avgAge: avgAge,
-        resultString: resultString
+        averageAge: averageAge,
+        names: names
     }
 }
 
