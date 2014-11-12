@@ -17,26 +17,25 @@ var makePerson = function(persArr) {
 
     for (var i = 0; i < persArr.length; i++) { 
     //set arrays for name and age
-        names += persArr[i].name;
-        ages += persArr[i].age;
+        names [i] = persArr[i].name; 
+        ages [i] = persArr[i].age;
+        ageTotal += ages[i];
+      
     }
     
+    ages.sort();
 
+    maxAge = ages[ages.length -1 ];
+
+    minAge = ages[ 0 ];
+
+    avgAge = Math.round(ageTotal / ages.length);
    
 
-    maxAge = ages.slice(-1);
-
-    minAge = ages[0];
-
-    ageTotal += ages[i]; //calculate total of ages
-
-    avgAge = ageTotal / ages.length;
-    // Din kod här...
-
     name = names.toString();
-    age = ages.toString();
+   
 
-    resultString = name.split(",");
+    resultString = name.split(",").join(", ");
 
     return {
         minAge: minAge,
@@ -55,9 +54,9 @@ var data = [{
     name: "Johan Leitet",
     age: 36
 }, {
-    name: "Mats Look",
+    name: "Mats Loock",
     age: 46
 }];
 var result = makePerson(data);
 console.log(result);
-return result;
+
