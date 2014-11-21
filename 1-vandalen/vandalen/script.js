@@ -64,6 +64,9 @@ var data = [{
 var result = makePerson(data);
 console.log(result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02c4618dae4e62e6afd65c1d8c891a7e92b27bdd
 =======
 >>>>>>> 02c4618dae4e62e6afd65c1d8c891a7e92b27bdd

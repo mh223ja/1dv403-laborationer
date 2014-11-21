@@ -4,8 +4,7 @@
         "configs": {
             "json()": {},
             "@inited": "true"
-        },
-        "@runner": "Node.js (default)"
+        }
     },
     "share": {
         "@preview": false,
