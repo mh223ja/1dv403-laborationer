@@ -1,0 +1,5 @@
+"strict use"
+function Message ()
+{
+    
+}

@@ -10,8 +10,13 @@ var guess = function(number) {
 	console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
 
 	numberOfGuesses += 1;
+    
+    if (isNaN(number)){
+    	return [false, "FEL! Du måste skriva en siffra imellan 1 och 100"]
+    }
 
-	if (number < 1 || number > 100) {
+
+    else if (number < 1 || number > 100) {
 		return [false, "FEL! Du måste ange ett nummber mellan 1 och 100"];
 	}
 
