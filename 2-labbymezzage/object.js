@@ -1,8 +1,14 @@
-function init ()
+"use strict"
+
+var MessageChange {
+
+init:function()
 {
-    var world = "Hello World!";
-    return function() {
-        alert(world)
-    }
+    var mess = new Message("Testmessage", new Date());
+    alert(mess);
+    alert (mess.getText());
+    mess.setText("My text")
+    alert(mess);
 }
-window.onload = init();
+}
+window.onload = MessageChange.init;
