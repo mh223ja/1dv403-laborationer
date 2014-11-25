@@ -25,8 +25,12 @@ Message.prototype.toString = function() { //string representation of object
 };
 
 
-Message.prototype.getHTMLText = function() {
-    return this.getText().replace(/[\n\r]/g);
-};
 
-Message.prototype.getDateText = function() {};
+
+var mess = new Message("Text", new Date());
+alert (mess);
+console.log(mess);
+alert(mess.getText());
+mess.setText("new text");
+console.log(mess);
+alert(mess);

@@ -2,17 +2,34 @@
 
 var MessageBoard = {
 
-    messages: ["No More Stomach Flu", "get out of the house", "two sick kids"],
+    messages: [],
+    
 
     init:function() {
-        var message = new Message("", new Date());
-        console.log("text", new Date());
-        alert(message);
-        alert(message.getText());
-        message.setText("MyText");
-        alert(message);
+        
+        
        }
-    };
- MessageBoard[2].getText();
+};
 
-window.onload = MessageBoard.init;
+ function submitMessage (){
+     var text = document.getElementById("textarea");//gets text
+     
+   if(text.value !== "") {    //if no inputted text, nothing happens
+   MessageBoard.messages.push(new Message (text, new Date())); //pushes to array
+   console.log(text.value);
+   }
+     
+   
+     
+     
+     
+ }
+       var newButton = document.createElement("button"); //create button 
+       newButton.HTML = "A button";
+       
+       var buttonParent = document.getElementById("buttonParent");
+       buttonParent.appendChild(newButton);
+    
+ 
+
+window.onload = MessageBoard.init; //window onload to initialize
