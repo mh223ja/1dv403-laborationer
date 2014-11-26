@@ -1,5 +1,4 @@
-"strict use";
-
+"use strict";
 function Message(message, date) {
 
     this.getText = function() { //get message
@@ -21,21 +20,27 @@ function Message(message, date) {
 }
 
 Message.prototype.toString = function() { //string representation of object
-    return this.getText() + " (" + this.getDate() + ")";
+    return this.getText()+"("+this.getDate()+")";
 };
 
 Message.prototype.getHTMLtext = function(){
-    return this.getText().replace(/[\n\r]/g, "<br>");
+    return this.getText().replace(/[\n\r]/g,"<br>");
 };
     
 
 Message.prototype.getDateText = function() {
-    
     var timeOfPost=new Date();
-    document.getElementByID("timeOfPost").innerHTML= timeOfPost;
+    var hours = timeOfPost.getHours();
+    var minutes = timeOfPost.getMinutes();
+    var seconds = timeOfPost.getSeconds();
+    
+    return hours+":"+minutes+":"+seconds;
 };
 
 
 
-
-
+var mess = new Message("Hi", new Date());
+console.log(mess);
+console.log(mess.getText());
+mess.setText("Goodbye");
+console.log(mess);

@@ -3,50 +3,43 @@
 var MessageBoard = {
 
     messages: [],
-    
 
-    init:function() {
-        var sendMessage = document.getElementByID("button");
-            sendMessage.onClick = MessageBoard.submitMessage;
-        
-       }
-};
+    init:function() 
+    {
+        var sendMessage = document.getElementById("button");
+            sendMessage.onClick = MessageBoard.submitMessage();
+       },
 
- function submitMessage (){ //submitting message via textarea
-     var text = document.getElementById("inputText");//gets text
-     var numberOfMessages; //variable to count messages
-       //if no inputted text, nothing happens
-   MessageBoard.messages.push(new Message (text.value, new Date()));  //add to array
-   MessageBoard.numberOfMessages +=1; //ups the count
+  submitMessage: function(){ //submitting message via textarea
+     var text = document.getElementById("textForm").value;//gets text
+     var numberOfMessages = 0; 
+   MessageBoard.messages.push(new Message(text, new Date()));
+   MessageBoard.numberOfMessages+=1; //ups the count
    document.getElementById("numberOfMessages").innerHTML="Number of Messages: " + MessageBoard.numberOfMessages;
-   }
+   MessageBoard.renderMessages();
+   },
 
 
- function renderMessages(){
-    document.getElementById("inputText").innerHTML = "";
+ renderMessages: function(){
+    document.getElementById("textForm").innerHTML = ""; //clear form
     
     for (var i=0; i< MessageBoard.messages.length;++i)
     {
         MessageBoard.renderMessage(i);
     }
-    
-}
-   function renderMessage(MessageID){
+},
+   
+   renderMessage: function (MessageID){
        
-       var div = document.getElementById("messages"); //sets div
-       var text = document.createElement("p");
-       text.innerHTML = MessageBoard.messages[MessageID].getHTMLtext();
-       div.appendChild(text); //text to DOM
+       var messList= document.getElementById("messages"); //links to id. messages
+       var messDiv = document.createElement("p"); //creates new section
+       messList.appendChild(messDiv);
+       
+      
+       messDiv.innerHTML = MessageBoard.messages[MessageID].getHTMLtext();
+       messList.appendChild(); //text to DOM
        
    }
-     
-     
-       var newButton = document.createElement("button"); //create button 
-       newButton.HTML = "A button";
-       
-       var buttonParent = document.getElementById("buttonParent");
-       buttonParent.appendChild(newButton);
-    
- 
-
+ };
 window.onload = MessageBoard.init; //window onload to initialize
+
