@@ -24,13 +24,18 @@ Message.prototype.toString = function() { //string representation of object
     return this.getText() + " (" + this.getDate() + ")";
 };
 
+Message.prototype.getHTMLtext = function(){
+    return this.getText().replace(/[\n\r]/g, "<br>");
+};
+    
+
+Message.prototype.getDateText = function() {
+    
+    var timeOfPost=new Date();
+    document.getElementByID("timeOfPost").innerHTML= timeOfPost;
+};
 
 
 
-var mess = new Message("Text", new Date());
-alert (mess);
-console.log(mess);
-alert(mess.getText());
-mess.setText("new text");
-console.log(mess);
-alert(mess);
+
+
