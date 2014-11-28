@@ -1,45 +1,49 @@
 "use strict";
-
+/*global Message, window*/
 var MessageBoard = {
 
     messages: [],
 
-    init:function() 
-    {
-        var sendMessage = document.getElementById("button");
-            sendMessage.onClick = MessageBoard.submitMessage();
-       },
+    init: function() {
+        var newMsg = document.querySelector("#button"); //links to button
+        newMsg.onclick = MessageBoard.saveMessages; //initiates sendMessage on click
+    },
 
-  submitMessage: function(){ //submitting message via textarea
-     var text = document.getElementById("textForm").value;//gets text
-     var numberOfMessages = 0; 
-   MessageBoard.messages.push(new Message(text, new Date()));
-   MessageBoard.numberOfMessages+=1; //ups the count
-   document.getElementById("numberOfMessages").innerHTML="Number of Messages: " + MessageBoard.numberOfMessages;
-   MessageBoard.renderMessages();
-   },
+    saveMessages: function() {
+        var text = document.getElementById("textForm"); //gets text from form 
+        var numberOfMessages = 0; //Sets variable to 0
+        var lastMessage;
+        console.log(text); //check if works
+        var newMessage = new Message(text.value, new Date());
+        MessageBoard.messages.push(newMessage);
+        lastMessage = MessageBoard.messages.length - 1; //message last in the array
+        MessageBoard.renderMessages(lastMessage); //activate renderMessages to publish latest message
+    },
 
 
- renderMessages: function(){
-    document.getElementById("textForm").innerHTML = ""; //clear form
-    
-    for (var i=0; i< MessageBoard.messages.length;++i)
-    {
-        MessageBoard.renderMessage(i);
-    }
-},
-   
-   renderMessage: function (MessageID){
-       
-       var messList= document.getElementById("messages"); //links to id. messages
-       var messDiv = document.createElement("p"); //creates new section
-       messList.appendChild(messDiv);
-       
-      
-       messDiv.innerHTML = MessageBoard.messages[MessageID].getHTMLtext();
-       messList.appendChild(); //text to DOM
-       
-   }
- };
-window.onload = MessageBoard.init; //window onload to initialize
 
+    renderMessage: function(messageID) {
+
+        var newDiv = document.createElement("div"); //adds new div to area
+        var messageText = document.createElement("p"); //create paragraph section
+
+
+        newDiv.setAttribute("class", "newDiv");
+        messageText.setAttribute("class", "messageText");
+        newDiv.appendChild(messageText);
+        messageText.innerHTML = MessageBoard.messages[messageID].getHTMLText();
+
+    },
+
+
+    renderMessages: function() {
+        var i;
+
+        for (i = 0; i < MessageBoard.messages.length; ++i) { //renders all messages
+            MessageBoard.renderMessage(i);
+        }
+    },
+
+};
+
+window.onload = MessageBoard.init;

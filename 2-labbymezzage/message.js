@@ -1,4 +1,5 @@
 "use strict";
+/*global Message, window*/
 function Message(message, date) {
 
     this.getText = function() { //get message
@@ -38,9 +39,3 @@ Message.prototype.getDateText = function() {
 };
 
 
-
-var mess = new Message("Hi", new Date());
-console.log(mess);
-console.log(mess.getText());
-mess.setText("Goodbye");
-console.log(mess);
