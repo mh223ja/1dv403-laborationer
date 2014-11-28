@@ -5,38 +5,57 @@ var MessageBoard = {
     messages: [],
 
     init: function() {
-        var newMsg = document.querySelector("#button"); //links to button
+        var newMsg = document.getElementById("button"); //links to button
         newMsg.onclick = MessageBoard.saveMessages; //initiates sendMessage on click
     },
 
     saveMessages: function() {
         var text = document.getElementById("textForm"); //gets text from form 
-        var numberOfMessages = 0; //Sets variable to 0
-        var lastMessage;
-        console.log(text); //check if works
+        //console.log(text); check if works
         var newMessage = new Message(text.value, new Date());
         MessageBoard.messages.push(newMessage);
-        lastMessage = MessageBoard.messages.length - 1; //message last in the array
+        var lastMessage = MessageBoard.messages.length - 1; //message last in the array
         MessageBoard.renderMessages(lastMessage); //activate renderMessages to publish latest message
     },
 
 
 
     renderMessage: function(messageID) {
-
+        var location=document.getElementById("displayMessage");
         var newDiv = document.createElement("div"); //adds new div to area
         var messageText = document.createElement("p"); //create paragraph section
 
-
-        newDiv.setAttribute("class", "newDiv");
+        //create new div
+        newDiv.setAttribute("class","newDiv");
+        location.appendChild(newDiv); //adds new div to DOM
+        
+        //send message to div
         messageText.setAttribute("class", "messageText");
         newDiv.appendChild(messageText);
         messageText.innerHTML = MessageBoard.messages[messageID].getHTMLText();
+        
+        //Delete button and delete
+        var deleteButton = document.createElement("img");
+        deleteButton.setAttribute=("src", "Delete_Icon.png");
+        
+        var deleteMessage=document.createElement("a");
+        deleteMessage.setAttribute("href","#");
+        deleteMessage.appendChild(deleteButton);
+        
+        deleteButton.onClick= function(removeMessage){
+            if(confirm("This will delete the message permenantly, are you sure?"))
+            {
+                
+            }
+           
+        }
 
     },
 
 
     renderMessages: function() {
+        
+        document.getElementById("displayMessage").innerHTML=""; //erases messages so array can write out fresh
         var i;
 
         for (i = 0; i < MessageBoard.messages.length; ++i) { //renders all messages
