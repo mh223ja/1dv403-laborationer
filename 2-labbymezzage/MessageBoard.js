@@ -56,17 +56,17 @@ var MessageBoard = {
        
        var clock=document.createElement("img");
        var timePiece=document.createElement("a");
-       var timeText=document.createElement("p");
        var timeDiv=document.createElement("div");
        
        clock.setAttribute("src", "clock.png");
        
        
        location.appendChild(newDiv);
-       newDiv.appendChild(clock);
+       newDiv.appendChild(timePiece);
+       timePiece.appendChild(clock);
        
        clock.onclick=function(){
-          publishTime(messageID);
+         alert("The message was written " + MessageBoard.messages[messageID].getDateText());
        };
     },
 
@@ -78,9 +78,7 @@ var MessageBoard = {
         for (i = 0; i < MessageBoard.messages.length; ++i) { //renders all messages
             MessageBoard.renderMessage(i);
         }
-    },
-    
-  
+    }
 
 };
 
