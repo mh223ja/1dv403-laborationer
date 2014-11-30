@@ -30,28 +30,45 @@ var MessageBoard = {
         location.appendChild(newDiv); //adds new div to DOM
         
         //send message to div
-        messageText.setAttribute("class", "messageText");
+        messageText.setAttribute("class","messageText");
         newDiv.appendChild(messageText);
         messageText.innerHTML = MessageBoard.messages[messageID].getHTMLText();
         
         //Delete button and delete
-        var deleteButton = document.createElement("img");
-        deleteButton.setAttribute=("src", "Delete_Icon.png");
-        
-        var deleteMessage=document.createElement("a");
-        deleteMessage.setAttribute("href","#");
-        deleteMessage.appendChild(deleteButton);
-        
-        deleteButton.onClick= function(removeMessage){
-            if(confirm("This will delete the message permenantly, are you sure?"))
-            {
-                
-            }
-           
-        }
-
+       var deleteButton=document.createElement("img");
+       deleteButton.setAttribute("src","Delete_Icon.png");
+       
+       var deleteMessage=document.createElement("a");
+       deleteMessage.appendChild(deleteButton);
+       
+       location.appendChild(newDiv);
+       newDiv.appendChild(deleteMessage);
+       deleteMessage.appendChild(deleteButton);
+       
+       deleteButton.onclick=function(){
+           if(confirm("Do you really want to erase this message forever?")){
+               MessageBoard.messages.splice(messageID,1);
+               MessageBoard.renderMessages();
+           }
+       };
+       
+       //add clock and time stamp
+       
+       var clock=document.createElement("img");
+       var timePiece=document.createElement("a");
+       var timeText=document.createElement("p");
+       var timeDiv=document.createElement("div");
+       
+       clock.setAttribute("src", "clock.png");
+       
+       
+       location.appendChild(newDiv);
+       newDiv.appendChild(clock);
+       
+       clock.onclick=function(){
+          publishTime(messageID);
+       };
     },
-
 
     renderMessages: function() {
         
@@ -62,6 +79,8 @@ var MessageBoard = {
             MessageBoard.renderMessage(i);
         }
     },
+    
+  
 
 };
 
