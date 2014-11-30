@@ -6,7 +6,20 @@ var MessageBoard = {
 
     init: function() {
         var newMsg = document.getElementById("button"); //links to button
-        newMsg.onclick = MessageBoard.saveMessages; //initiates sendMessage on click
+        //'listens' for enter click
+        
+        var listenEnter=document.getElementById("textForm");
+       
+       listenEnter.addEventListener("keypress", function(e){          
+            if (!e) {
+                e = window.event;
+        }
+        
+        if (e.keyCode == 13 && !e.shiftKey){
+            MessageBoard.newMsg(); 
+           }
+        });
+             newMsg.onclick = MessageBoard.saveMessages;
     },
 
     saveMessages: function() {
@@ -56,7 +69,7 @@ var MessageBoard = {
        
        var clock=document.createElement("img");
        var timePiece=document.createElement("a");
-       var timeDiv=document.createElement("div");
+     
        
        clock.setAttribute("src", "clock.png");
        
