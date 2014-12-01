@@ -1,7 +1,7 @@
 header{
     width: 100%;
-    background-color: #99CCFF;
-    color: #0F141A;
+    background-color: #6D929B;
+    color: #C1DAD6;
     Font: Georgia;
     font-size: 28pt;
     text-align: center;
@@ -9,9 +9,9 @@ header{
 
 body{
     width: 85%;
-    background-color: #F5FAFF;
+    background-color: #F5FAFA;
     Font: Verdana;
-    color: #0F141A;
+    color: #FFF;
 }
 
 p{
@@ -19,7 +19,7 @@ p{
     font-size: 16pt;
     color: black;
     line-height:20pt;
-    background-color: lime;
+    background-color: #B7AFA3;
 }
 
 #MessageBoard{
@@ -29,13 +29,13 @@ p{
 
 #button{
     text-align: center;
-    background-color: #7AA33C;
+    background-color: #ACD1E9;
 }
 
 footer{
     width: 100%;
-    background-color:#99CCFF;
-    color: #0F141A;
+    background-color:#6D929B;
+    color: #C1DAD6;
     Font: Georgia;
     font-size: 20pt;
     text-align: center;
