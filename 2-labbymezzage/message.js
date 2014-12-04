@@ -35,6 +35,9 @@ Message.prototype.getDateText = function() {
    var hours = todaysDate.getHours();
    var minutes = todaysDate.getMinutes();
    var seconds = todaysDate.getSeconds();
+   var month = todaysDate.getMonth();
+   var year = todaysDate.getFullYear();
+   var day = todaysDate.getDay();
    
    
    if (hours<10) {
@@ -48,7 +51,15 @@ Message.prototype.getDateText = function() {
    if (seconds <10) {
        seconds = "0" + seconds;
    }
-   return  hours + ":" +  minutes + ":" + seconds;
+   
+   if (month <10){
+       month = "0" + month;
+   }
+   
+   if (day < 10){
+       day = "0" + day;
+   }
+   return hours + ":" +  minutes + ":" + seconds + " " + day + "/" + month + "/" + year;
    
 };
 
