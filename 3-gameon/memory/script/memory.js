@@ -1,49 +1,44 @@
 "use strict";
 /*global RandomGenerator, window*/
 
-var memoryGame = {
+var MemoryGame = {
     
+    cardArray: [], 
     
-    init: function(){
+       init: function(){
+    //var rows;
+    //var cols;
         
-        var gridSize = {x: 6,y: 6};
-        var cellSize = {x: 150, y: 200};
-        var i;
-        var j;
+        MemoryGame.cardArray = RandomGenerator.getPictureArray(6,6); // creates array of cards using random
+        console.log(MemoryGame.cardArray);
+},
+
+     renderGame: function(newBoard){
+         
+         var location = document.getElementById("gameBoard");
+         var newDiv = document.createElement("div");
+         location.appendChild(newDiv);
+         
+         
+         //create table
+      var table = document.createElement("table"); //build a table
+      for (var i = 0; i< 6; i++){ //based on number of rows
+        var row = document.createElement("tr");
+        table.appendChild(row);
         
-      for ( i=0; i< gridSize.x; i++){
-          for (j=0; j< gridSize.y; j++)
-          {
-              this.createCard(i, j);
-          }
+      for (var j = 0; j<6; j++){
+        var column = document.createElement("td");
+        table.appendChild(column);
+      }
+      
+     var backImage = document.createElement("img");
+         backImage.setAttribute("src", "pics/0.png");
+        
       }
        
-        
-        this.load = function()
-        {
-            
-        };
-        
-        this.createCard = function(i, j){
-            var x = (i - gridSize.x/2 + 0.5) * cellSize.x;
-            var y = (j - gridSize.y/2 + 0.5) * cellSize.y;
-            var cardBack = new CardBack("pics/0.png");
-            
-        };
-        
-    },
-    
-   
-   boardSetup: function(){
-   
-       var randomGenerator= new RandomGenerator(7, 4);
-       alert(randomGenerator);
-       
-       
-       
-   },
-        
-    
+     },
 
 };
-window.onload=memoryGame.init;
+
+window.onload = MemoryGame.init;
+
