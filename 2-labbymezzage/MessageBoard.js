@@ -8,15 +8,15 @@ var MessageBoard = {
         var newMsg = document.getElementById("button"); //links to button
         newMsg.onclick = MessageBoard.saveMessages;
         //'listens' for enter click'
-
+        
 
         var listenEnter = document.getElementById("textForm");
-
-
-
+        
+ 
+        
         listenEnter.onkeypress = function(e) {
-
-            if (!e) {
+            
+            if(!e) {
                 e = window.event;
             }
 
@@ -44,16 +44,16 @@ var MessageBoard = {
         var location = document.getElementById("displayMessage");
         var newDiv = document.createElement("div"); //adds new div to area
         var messageText = document.createElement("p"); //create paragraph section
-
-        var counter = MessageBoard.messages.length ? MessageBoard.messages.length : 0;
+        
+        var counter = MessageBoard.messages.length ? MessageBoard.messages.length: 0;
         var counterDiv = document.getElementById("numberOfMessages");
-        counterDiv.innerHTML = "";
-
+        counterDiv.innerHTML="";
+        
         var counterText = document.createElement("p");
         counterText.innerHTML = "Number of messages sent: " + counter;
         counterDiv.appendChild(counterText);
         console.log(counterDiv);
-
+      
 
         //create new div
         newDiv.setAttribute("class", "newDiv");
@@ -63,7 +63,7 @@ var MessageBoard = {
         messageText.setAttribute("class", "messageText");
         newDiv.appendChild(messageText);
         messageText.innerHTML = MessageBoard.messages[messageID].getHTMLText();
-
+        
 
         var dateDiv = document.createElement("div");
         var addDate = document.createElement("p");
@@ -72,9 +72,9 @@ var MessageBoard = {
         messageText.appendChild(dateDiv);
         dateDiv.appendChild(addDate);
         addDate.innerHTML = MessageBoard.messages[messageID].getDateText();
-
+        
         // add counter
-
+       
         //counterDiv.setAttribute("class", "numberOfMessages");
         //counterDiv.appendChild(counterText);
         /*var counter = MessageBoard.messages.length;
@@ -102,11 +102,12 @@ var MessageBoard = {
             if (confirm("Do you really want to erase this message forever?")) {
                 MessageBoard.messages.splice(messageID, 1);
                 MessageBoard.renderMessages();
-                if (!MessageBoard.messages.length) {
-                    counter = 0;
-                    counterText.innerHTML = "";
-                }
-
+                counter = MessageBoard.messages.length ? MessageBoard.messages.length: 0;
+              counterText = document.createElement("p");
+        counterText.innerHTML = "Number of messages sent: " + counter;
+        counterDiv.appendChild(counterText);
+        console.log(counterDiv);
+                
             }
         };
 
@@ -126,13 +127,13 @@ var MessageBoard = {
         clock.onclick = function() {
             alert("The message was written " + MessageBoard.messages[messageID].getDateText());
         };
-
-        // add counter
-
+        
+                // add counter
+       
         //counterDiv.setAttribute("class", "numberOfMessages");
         //counterDiv.appendChild(counterText);
 
-
+    
     },
 
     renderMessages: function() {
@@ -143,8 +144,8 @@ var MessageBoard = {
         for (i = 0; i < MessageBoard.messages.length; ++i) { //renders all messages
             MessageBoard.renderMessage(i);
         }
-
-
+        
+   
     }
 
 };
