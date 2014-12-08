@@ -1,59 +1,68 @@
-"use strict";
+"use strict"
 /*global RandomGenerator, window*/
 
 var MemoryGame = {
+    
+    
 
     cardArray: [],
 
-    init: function() {
+    init: function () {
+        
         var rows = 4;
         var cols = 4;
 
+
+      
         MemoryGame.cardArray = RandomGenerator.getPictureArray(rows, cols); // creates array of cards using random
         console.log(MemoryGame.cardArray); //write out array to show is working
-        MemoryGame.renderGame(); //runs renderGame
+        MemoryGame.renderGame(MemoryGame.cardArray); //runs renderGame
     },
 
-    renderGame: function() {
-
+    renderGame: function (newBoard) {
+       
+        
+        var newDiv = document.createElement("div");
         var location = document.getElementById("gameboard"); //sets where table will be located
-        //var newDiv = document.createElement("div");
-        var table = document.createElement("table");
         var i;
-        var row = document.createElement("tr");
         var j;
-        var column = document.createElement("td");
-        var backImage = document.createElement("img");
-        backImage.setAttribute("src", "pics/0.png");
-        var link = document.createElement("a");
-        link.setAttribute("href", "#");
+        var card = document.createElement("div");
+        var row = null;
+        var column = null;
+      
         
-        console.log(row);
-
-
-
-        location.appendChild(table); //insert new div in HTML
+        location.appendChild(newDiv);
+      
+        var table = document.createElement("table");
+        newDiv.appendChild(table);
         
-     //build a table in new div
-        
-        for (i=0; i<4;i++) { //based on number of rows
+        for (i = 0; i < 4; i++) { 
+            row = document.createElement("tr");//based on number of rows
             table.appendChild(row); //adds a row until max number of rows
             console.log(row);
 
-            for (j=0;j<4;++j) {
-                table.appendChild(column); //adds a column until max number of cols
-                console.log(column);
+            for (j = 0; j < 4; j++) {
+             column = document.createElement("td");
+             var backImage = document.createElement("img");
+             backImage.setAttribute("src", "pics/0.png");
+             var link = document.createElement("a");
+             link.setAttribute("href", "#");
+             
+                card.appendChild(link);
+                link.appendChild(backImage);
+                column.appendChild(link);
+                row.appendChild(column);
                 
-                column.appendChild(backImage); //adds image to each cell
-                
-                backImage.appendChild(link); //adds link to image
-
             }
-
+            
         }
-
+        
+        
     },
 
 };
 
-window.onload = MemoryGame.init;
+window.onload = MemoryGame.init; 
+
+//note to self end of evening - Now have one picture that shows up, on one Tr, need to make it so that you can see it on multiple
+
