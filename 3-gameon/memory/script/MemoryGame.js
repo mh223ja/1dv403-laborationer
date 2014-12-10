@@ -6,10 +6,11 @@ var MemoryGame = {
         cardArray: [],
 
         init: function() {
-
+            
+            var backImage
             var rows = 4;
             var cols = 4;
-        
+
 
 
             MemoryGame.cardArray = RandomGenerator.getPictureArray(rows, cols); // creates array of cards using random
@@ -17,7 +18,7 @@ var MemoryGame = {
             MemoryGame.renderGame(MemoryGame.cardArray); //runs renderGame
         },
 
-        renderGame: function (newBoard) {
+        renderGame: function(newBoard, backImage) {
 
 
             var newDiv = document.createElement("div"); //creates new div to add to board
@@ -28,10 +29,11 @@ var MemoryGame = {
             var row = null;
             var column = null;
             var link = null;
-            var backImage = null;
+            //var backImage = null;
+            var cardNumber = 0;
             var boardArray = [];
-            
-           
+
+
 
             location.appendChild(newDiv); //insert div at location
 
@@ -41,22 +43,33 @@ var MemoryGame = {
             for (i = 0; i < 4; i++) {
                 row = document.createElement("tr"); //based on number of rows
                 table.appendChild(row); //adds a row until max number of rows
-                console.log(row); //check if rows are added
+                //console.log(row); //check if rows are added
 
                 for (j = 0; j < 4; j++) {
                     column = document.createElement("td"); //create cell
-                    backImage = document.createElement("img");//create image
-                    backImage.className = MemoryGame.cardArray[i*4+j]; //link image to array number
+                    backImage = document.createElement("img"); //create image
+                    backImage.className = MemoryGame.cardArray[i * 4 + j]; //link image to array number
                     backImage.setAttribute("src", "pics/0.png"); //add image
-                    console.log(boardArray);
-              
+                    // backImage.addEventListener('click', turnover: function ();
+
+
+
                     link = document.createElement("a"); //adds link and a tag
                     link.setAttribute("href", "#");
-                    //link.onclick = function() {
-                      //  MemoryGame.turnOver(backImage.className);
-                    //};
-                    
-                    link.appendChild(document.createTextNode(MemoryGame.cardArray[i*4+j]));
+
+                    //console.log(link);
+
+                    link.onclick = function() {
+                        //console.log("click2");
+
+                        MemoryGame.turnOver(backImage, backImage.className);
+
+                    };
+
+
+
+
+                    //link.appendChild(document.createTextNode(MemoryGame.cardArray[i * 4 + j]));
                     card.appendChild(link); //creates a div and adds a link
                     link.appendChild(backImage); //adds a image
                     column.appendChild(link); //adds card to cell
@@ -69,47 +82,58 @@ var MemoryGame = {
 
                 }
 
+
             }
+
+
+
+        },
+
+
+        turnOver: function(imageClass, backImage) {
+
+            var flippedCards = 0;
+            //var cardClicked = 0;
+            var firstCard;
+            var secondCard;
             
-           
+            
 
-    },
+            // link.onclick = function(link,  backImage) {
+
+            //console.log("click");
+
+            console.log(imageClass);
+
+            if (imageClass.src = "pics/0.png") {
+                console.log(backImage.src, "1");
+
+                {
+                    imageClass.setAttribute("src", "pics/"+ imageClass.className +".png");
+                }
 
 
-/*    turnOver: function(cardCounter, backImage, link) {
-        
-        var gameArray;
-        
-        link.onclick = function () {
-            if(backImage.getAttribute("src") === "pics/0.png") {
-                gameArray.push(link);
-                
-                
+
+                console.log(backImage);
+                console.log(flippedCards);
+
+
+                /*flippedCards++;
+
+                 if (flippedCards == 1) {
+                     firstCard = frontImage;
+                 }
+
+                 if (flippedCards == 2) {
+                     secondCard = frontImage;
+                     MemoryGame.matchMaker(firstCard, secondCard); */
+            
+
             }
-        };
 
-    }
-
-/*   matchMaker: function (link, backImage) {
-
-    if (MemoryGame.cardArray[0].getElementsByTagName("img")[0].getAttribute("src") === MemoryGame.cardArray[1].getElementsByTagName("img")[0].getAttribute("src")) {
-
-        var pairCounter = 0;
-        pairCounter++;
-
-        MemoryGame.cardArray = [];
-    
-        //separates two cards selected out*/
-
-
-
-
-
-
+            }
 
 };
-
-
 
 window.onload = MemoryGame.init;
 
