@@ -1,7 +1,7 @@
 "use strict";
 /*global RandomGenerator, window*/
 
-var backImage;
+//var backImage;
 
 
 
@@ -36,7 +36,7 @@ var MemoryGame = {
         var column = null;
         var link = null;
         // var frontImage;
-        //var backImage = null;
+        var backImage = null;
         //var cardNumber = 0;
 
 
@@ -75,8 +75,8 @@ var MemoryGame = {
 
                 //console.log(link);
 
-                link.onclick = (function(l, className) { // l -individual link
-                    return function() { 
+                link.onclick = (function(l,className) { // l -individual link
+                    return function() {
                         console.log("click2");
                         MemoryGame.turnOver(l, className); //info being passed on 
                     };
@@ -130,31 +130,66 @@ var MemoryGame = {
 
     turnOver: function(backImage, flippedCard) {
 
-        var flippedCards = 0;
+        var flippedCards = [];
         var cardClicked;
-        //var firstCard;
-        //var secondCard;
+        var firstCard;
+        var secondCard;
+        var count = 0;
+        var z = 0;
         //var flippedCard;
 
-         console.log(backImage.src, "1");
-         
-         if (flippedCards < 2) {
-
-        if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
-            console.log("urhere");
-
-
-            backImage.setAttribute("src", "pics/" + backImage.className + ".png");
-            console.log(backImage);
-            
-            flippedCards +1;
-            
-        }
+        //console.log(backImage.src, "1");
         
-         }
+        
+ //if(flippedCards.length < 2)
+     
+    if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
+        //if (flippedCards.length < 2) {
+            //if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
+                console.log("urhere");
+                
+                console.log(count);
+                
+                
+                
+
+                backImage.setAttribute("src", "pics/" + backImage.className + ".png");
+                
+                count++;
+            
+                //console.log(backImage);
+                
+                flippedCards.push(backImage);
+                console.log(flippedCards.length);
+                
+                //if (count <=2) { 
+                  //  matchMaker();
+                    
+                }
+                
+                //z++;
+                //console.log(z, "z")
     }
 
+   // console.log(m, "m");
+    
+    
 
+            
+
+          /*  if (count === 0) {
+                backImage = firstCard;
+                console.log(firstCard);
+            }
+
+            if (count === 1) {
+                backImage = secondCard;
+                console.log(secondCard);
+            }
+            
+          }
+        */
+    
 };
 
 
