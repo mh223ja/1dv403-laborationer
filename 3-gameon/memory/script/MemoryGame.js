@@ -10,6 +10,7 @@ var MemoryGame = {
 
 
     cardArray: [],
+    cardCount: [],
 
     init: function() {
 
@@ -75,10 +76,11 @@ var MemoryGame = {
 
                 //console.log(link);
 
-                link.onclick = (function(l,className) { // l -individual link
+                link.onclick = (function(l, className, counter) { // l -individual link
                     return function() {
                         console.log("click2");
-                        MemoryGame.turnOver(l, className); //info being passed on 
+                        counter++;
+                        MemoryGame.turnOver(l, className, counter); //info being passed on 
                     };
                 })(backImage, backImage.className); //the parameter
 
@@ -109,92 +111,81 @@ var MemoryGame = {
 
 
 
+    turnOver: function(backImage, flippedCard, counter) {
 
-
-
-
-    //link.onclick = function(link, backImage) {
-
-    //console.log("click");
-
-    //console.log();
-
-
-
-
-
-    // turnOver();
-
-
-
-
-    turnOver: function(backImage, flippedCard) {
-
-        var flippedCards = [];
+        //var flippedCards = [];
         var cardClicked;
         var firstCard;
         var secondCard;
         var count = 0;
         var z = 0;
         //var flippedCard;
+        
+        if (MemoryGame.cardCount.length <2){
+            
+            // for (var m = 0; m < MemoryGame.cardArray.length; m++) {
+            if (MemoryGame.cardCount.length === 0) {
 
-        //console.log(backImage.src, "1");
-        
-        
- //if(flippedCards.length < 2)
-     
-    if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
-        //if (flippedCards.length < 2) {
-            //if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
+
+            if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
+                //if (flippedCards.length < 2) {
+                //if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
                 console.log("urhere");
-                
-                console.log(count);
-                
-                
-                
+
+                //console.log(count);
+
+
+                //if (flippedCards === 0);
 
                 backImage.setAttribute("src", "pics/" + backImage.className + ".png");
+
+                MemoryGame.cardCount.push(backImage);
+
+                console.log(backImage);
+                console.log(MemoryGame.cardCount.length);
+                console.log(MemoryGame.cardCount);
+            }
+            }
+
+            else if (MemoryGame.cardCount.length == 1) {
                 
-                count++;
-            
-                //console.log(backImage);
-                
-                flippedCards.push(backImage);
-                console.log(flippedCards.length);
-                
-                //if (count <=2) { 
-                  //  matchMaker();
-                    
-                }
-                
-                //z++;
-                //console.log(z, "z")
+                 if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
+                //if (flippedCards.length < 2) {
+                //if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
+                console.log("urhere");
+
+                backImage.setAttribute("src", "pics/" + backImage.className + ".png");
+                MemoryGame.cardCount.push(backImage);
+                 }
+
+            }
+
+            //console.log(m);
+           // count++;
+            //console.log(count);
+        }
     }
-
-   // console.log(m, "m");
     
-    
+    };
 
-            
 
-          /*  if (count === 0) {
-                backImage = firstCard;
-                console.log(firstCard);
-            }
+    //if (count <=2) { 
+    //  matchMaker();
 
-            if (count === 1) {
-                backImage = secondCard;
-                console.log(secondCard);
-            }
-            
-          }
-        */
-    
-};
+
+
+    //z++;
+    //console.log(z, "z")
+
+
+    // console.log(m, "m");
 
 
 
 
+
+    //firstCard = flippedCards[0];
+    //secondCard = flippedCards[1];
 
 //console.log(flippedCards);
 
@@ -208,14 +199,6 @@ var MemoryGame = {
  if (flippedCards == 2) {
      secondCard = frontImage;
      MemoryGame.matchMaker(firstCard, secondCard); */
-
-
-
-
-
-
-
-
 
 window.onload = MemoryGame.init;
 
