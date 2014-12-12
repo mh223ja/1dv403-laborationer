@@ -11,7 +11,9 @@ var MemoryGame = {
 
     cardArray: [],
     cardCount: [],
-
+    countPair: 0,
+    tries: 0,
+    
     init: function() {
 
         //var backImage;
@@ -147,7 +149,7 @@ var MemoryGame = {
             }
             }
 
-            else if (MemoryGame.cardCount.length == 1) {
+             if (MemoryGame.cardCount.length == 1) {
                 
                  if (backImage.src == "https://1dv403-laborationer-c9-mh223ja.c9.io/3-gameon/memory/pics/0.png") {
                 //if (flippedCards.length < 2) {
@@ -156,6 +158,21 @@ var MemoryGame = {
 
                 backImage.setAttribute("src", "pics/" + backImage.className + ".png");
                 MemoryGame.cardCount.push(backImage);
+                console.log(MemoryGame.cardCount);
+                console.log(MemoryGame.cardCount[0]);
+                console.log(MemoryGame.cardCount[1]);
+                console.log(MemoryGame.cardCount.length);
+                //console.log(MemoryGame);
+                 }
+                
+               if (MemoryGame.cardCount.length == 2){
+                    console.log("Do I get here?");
+                    console.log(MemoryGame.cardCount.length);
+               // setTimeout(function () {
+                   // console.log(MemoryGame.cardCount[1], MemoryGame.cardCount[2]);
+                    //console.log("how about here?");
+                    MemoryGame.matchMaker(MemoryGame.cardCount);
+                }
                  }
 
             }
@@ -163,42 +180,47 @@ var MemoryGame = {
             //console.log(m);
            // count++;
             //console.log(count);
+        
+    },
+    
+    matchMaker: function (cardCount) {
+        console.log("made it to matchmaker");
+        
+    var firstCard = cardCount[0].getAttribute("src");
+    console.log(firstCard);
+    var secondCard = cardCount[1].getAttribute("src");
+    console.log(secondCard);
+    
+    if (firstCard == secondCard){
+        
+    
+        MemoryGame.countPair++;
+        console.log(MemoryGame);
+        
+        
+        if (MemoryGame.countPair === 8) {
+            alert ("Congrats! You won in " + MemoryGame.tries + " tries.");
         }
+        
+        MemoryGame.cardCount = [];
     }
     
+    else {
+        
+        setTimeout (function() {
+        cardCount[0].setAttribute("src", "pics/0.png");
+        cardCount[1].setAttribute("src", "pics/0.png");
+        MemoryGame.cardCount.length = 0;
+        console.log(cardCount);
+        }, 1000);
+    }
+    
+    ++MemoryGame.tries;
+    
+    }
     };
 
 
-    //if (count <=2) { 
-    //  matchMaker();
-
-
-
-    //z++;
-    //console.log(z, "z")
-
-
-    // console.log(m, "m");
-
-
-
-
-
-    //firstCard = flippedCards[0];
-    //secondCard = flippedCards[1];
-
-//console.log(flippedCards);
-
-
-/*flippedCards++;
-
- if (flippedCards == 1) {
-     firstCard = frontImage;
- }
-
- if (flippedCards == 2) {
-     secondCard = frontImage;
-     MemoryGame.matchMaker(firstCard, secondCard); */
 
 window.onload = MemoryGame.init;
 
