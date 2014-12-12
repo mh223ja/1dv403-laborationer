@@ -61,14 +61,6 @@ var MemoryGame = {
                 backImage.className = boardArray[i * 4 + j]; //link image to array number
                 backImage.setAttribute("src", "pics/0.png"); //add image
 
-                // backImage.addEventListener('click', turnover: function ();
-                //console.log(backImage.className);
-                //frontImage = document.createElement("img");
-                //frontImage.setAttribute("src", "pics/" + boardArray[i * 4 + j] + ".png");
-                //console.log(frontImage);
-
-
-
                 link = document.createElement("a"); //adds link and a tag
                 link.setAttribute("href", "#");
                 link.setAttribute("id", "link");
@@ -115,17 +107,10 @@ var MemoryGame = {
 
     turnOver: function(backImage, flippedCard, counter) {
 
-        //var flippedCards = [];
-        var cardClicked;
-        var firstCard;
-        var secondCard;
-        var count = 0;
-        var z = 0;
-        //var flippedCard;
-        
+ 
         if (MemoryGame.cardCount.length <2){
             
-            // for (var m = 0; m < MemoryGame.cardArray.length; m++) {
+           
             if (MemoryGame.cardCount.length === 0) {
 
 
