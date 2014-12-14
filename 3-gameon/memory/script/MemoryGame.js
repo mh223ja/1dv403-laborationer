@@ -83,7 +83,7 @@ var MemoryGame = {
 
 
 
-                link.appendChild(document.createTextNode(boardArray[i * 4 + j]));
+                //link.appendChild(document.createTextNode(boardArray[i * 4 + j]));
                 //  card.appendChild(link); //creates a div and adds a link
                 link.appendChild(backImage); //adds a image
                 column.appendChild(link); //adds card to cell
