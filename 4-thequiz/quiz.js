@@ -27,7 +27,6 @@ var Quiz = {
         var input = document.createElement("input");
         input.setAttribute("placeholder", "Write your answer here: ");
         var button = document.createElement("button");
-        button.addEventListener("click", Quiz.sendQuestion);
         var answerField = document.getElementById("answerField");
         //var question = document.querySelector("p");
 
@@ -38,7 +37,9 @@ var Quiz = {
 
 
         answerField.appendChild(input);
-        input.appendChild(button);
+        answerField.appendChild(button);
+        
+        button.addEventListener("click", Quiz.sendAnswer, console.log("PUSH!"));
 
 
 
@@ -94,12 +95,43 @@ var Quiz = {
 
 
     sendAnswer: function() {
+        console.log("hi there");
         var xhr = new XMLHttpRequest();
         xhr.open("POST", Quiz.url, true); //server only accepts POST
         xhr.setRequestHeader('content-type', 'application/json');
+        
+        var answer = document.getElementById("input");
+        console.log(answer);
+       
+        
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                   Quiz.correctAnswer(Quiz.question);
+                   console.log("RIGHT!");
+                }
+            }
+            
+            if (xhr.readyState !== 4) {
+                if (xhr.status !== 200) {
+                    Quiz.wrongAnswer(Quiz.question);
+                    console.log("WRONG!");
+                }
+                
+            }
+        };
+        },
 
-
+    correctAnswer: function() {
+        
+    },
+    
+    wrongAnswer: function() {
+        
     }
+    
+    
+    
 
 
 };
