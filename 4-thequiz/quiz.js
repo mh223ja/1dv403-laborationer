@@ -3,7 +3,7 @@
 
 var Quiz = {
 
-    question: undefined,
+    //question: undefined,
     //infoURL: "http://vhost3.lnu.se:20080/question/1",
 
 
@@ -36,10 +36,10 @@ var Quiz = {
         newDiv.appendChild(newP);
 
 
-        answerField.appendChild(input);
+        //answerField.appendChild(input);
         answerField.appendChild(button);
-        
-        button.addEventListener("click", Quiz.sendAnswer, console.log("PUSH!"));
+
+        //button.addEventListener("click", Quiz.sendAnswer, console.log("PUSH!"));
 
 
 
@@ -76,11 +76,20 @@ var Quiz = {
                 else {
                     console.log("read error, status: " + xhr.status);
                 }
+                var pushSend = document.getElementById("send");
+                pushSend.onclick = function() {
+                    Quiz.sendAnswer(nextUrl);
+                };
             }
         };
 
         xhr.open("GET", Quiz.url, true);
         xhr.send(null);
+
+        /* var pushSend = document.getElementById("send");
+        pushSend.onclick = function(){
+            Quiz.sendAnswer(nextUrl);*/
+
     },
 
     postQuestion: function(question) {
@@ -90,48 +99,48 @@ var Quiz = {
 
     },
 
-
-
-
-
-    sendAnswer: function() {
-        console.log("hi there");
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", Quiz.url, true); //server only accepts POST
-        xhr.setRequestHeader('content-type', 'application/json');
-        
-        var answer = document.getElementById("input");
-        console.log(answer);
+   sendAnswer: function(nextUrl){
+       console.log("hi");
+       var xhr = new XMLHttpRequest();
+       console.log("there");
+       xhr.open("post",nextUrl, true);
+       console.log("where");
+       xhr.setRequestHeader("content-type", "application/json");
+       console.log(nextUrl);
+     
        
-        
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                   Quiz.correctAnswer(Quiz.question);
-                   console.log("RIGHT!");
-                }
-            }
-            
-            if (xhr.readyState !== 4) {
-                if (xhr.status !== 200) {
-                    Quiz.wrongAnswer(Quiz.question);
-                    console.log("WRONG!");
-                }
-                
-            }
-        };
-        },
+       var answerText = document.getElementById("answerSheet");
+       var finalAnswer = {
+           answer: answerText.value,
+       };
+      console.log(xhr);
+      xhr.addEventListener("readystatechange", function() {console.log(xhr.readyState);}, false);
+   xhr.onreadystatechange = function(){
+       console.log(xhr.readyState)
+       if(xhr.readyState ===4){
+           if(xhr.status===200){
+               var question = JSON.parse(xhr.responseText);
+               Quiz.url = question.nextURL;
+           }
+       }
+          if(xhr.readyState !== 4){
+              if(xhr.status !== 200){
+                  var wrongAnswer = document.createElement("p");
+                  wrongAnswer.innerHTML = "Wrong! Please try again";
+                  
+                  
+              }
+          }
+          
+          xhr.send(JSON.stringify(finalAnswer));
+       };
+       
+   }
 
-    correctAnswer: function() {
-        
-    },
-    
-    wrongAnswer: function() {
-        
-    }
-    
-    
-    
+
+    //wrongAnswer: function() {
+
+    //}
 
 
 };
