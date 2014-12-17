@@ -78,7 +78,9 @@ var Quiz = {
                 }
                 var pushSend = document.getElementById("send");
                 pushSend.onclick = function() {
+                    console.log(pushSend);
                     Quiz.sendAnswer(nextUrl);
+                   
                 };
             }
         };
@@ -115,7 +117,8 @@ var Quiz = {
        };
       console.log(xhr);
       xhr.addEventListener("readystatechange", function() {console.log(xhr.readyState);}, false);
-   xhr.onreadystatechange = function(){
+   xhr.onreadystatechange = function (e){
+      
        console.log(xhr.readyState)
        if(xhr.readyState ===4){
            if(xhr.status===200){
@@ -125,17 +128,18 @@ var Quiz = {
        }
           if(xhr.readyState !== 4){
               if(xhr.status !== 200){
+                  console.log("WRONG!");
                   var wrongAnswer = document.createElement("p");
                   wrongAnswer.innerHTML = "Wrong! Please try again";
                   
-                  
+              }
               }
           }
           
           xhr.send(JSON.stringify(finalAnswer));
-       };
+       }
        
-   }
+   
 
 
     //wrongAnswer: function() {
