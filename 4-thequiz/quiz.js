@@ -6,13 +6,14 @@ var Quiz = {
     //question: undefined,
     //infoURL: "http://vhost3.lnu.se:20080/question/1",
 
-
+     tries: 0,
 
     init: function() {
 
         Quiz.url = "http://vhost3.lnu.se:20080/question/1";
         Quiz.getQuestion();
         Quiz.renderQuiz();
+
 
     },
 
@@ -26,18 +27,23 @@ var Quiz = {
         var newP = document.createElement("p");
         var input = document.createElement("input");
         input.setAttribute("placeholder", "Write your answer here: ");
-        var button = document.createElement("button");
-        var answerField = document.getElementById("answerField");
-        //var question = document.querySelector("p");
+        var footer = document.createElement("footer");
+        var triesText = document.createElement("p");
+        triesText.innerHTML = "You have tried to answer this question with " + Quiz.tries;
+        console.log(triesText);
+        var question = document.querySelector("p");
+        var container = document.getElementById("container");
+        
 
 
 
         questionField.appendChild(newDiv);
         newDiv.appendChild(newP);
 
-
+        container.appendChild(footer);
+        footer.appendChild(triesText);
+        
         //answerField.appendChild(input);
-        answerField.appendChild(button);
 
         //button.addEventListener("click", Quiz.sendAnswer, console.log("PUSH!"));
 
@@ -47,11 +53,23 @@ var Quiz = {
     },
 
     getQuestion: function() {
+        Quiz.counter +=1;
+       /* var attempt;
+        console.log(attempt);
+        Quiz.tries.push(attempt);
+        console.log(Quiz.tries.length);*/
+        var answerArea = document.getElementById("answerSheet");
+        answerArea.innerHTML="";
+        
+        //Quiz.renderQuiz.triesText.innerHTML="You have tried to answer " + Quiz.tries.length + " times";
+        //var question = document.querySelector("p");
 
 
         //retriev equestion from server
         console.log("you are here");
+        
         var xhr = new XMLHttpRequest();
+     
 
 
         xhr.onreadystatechange = function() {
@@ -66,6 +84,12 @@ var Quiz = {
                     console.log(question);
                     var nextUrl = questionRetrieve.nextURL;
                     console.log(nextUrl);
+                    if (question.status === "newQuestion"){
+                        var attempts = Quiz.tries[Quiz.tries.length];
+                        attempts = 1;
+                        var countText = document.getElementById("footer");
+                        countText.innerHTML="You have tried to answer " + attempts-1 + "times";
+                    }
                     Quiz.postQuestion(question);
 
 
@@ -102,6 +126,9 @@ var Quiz = {
     },
 
     sendAnswer: function(nextUrl) {
+        
+   
+        var attempts=0;
         console.log("hi");
         var xhr = new XMLHttpRequest();
         console.log("there");
@@ -136,6 +163,8 @@ var Quiz = {
             if (xhr.status !== 200) {
                 console.log("WRONG!");
                 var wrongAnswer = document.createElement("p");
+                var answerSheet = document.getElementById("answerSheet");
+                answerSheet.appendChild(wrongAnswer);
                 wrongAnswer.innerHTML = "Wrong! Please try again";
 
             }
@@ -143,6 +172,7 @@ var Quiz = {
         };
 
         xhr.send(JSON.stringify(finalAnswer));
+       
 
 
     }
