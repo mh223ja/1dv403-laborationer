@@ -54,25 +54,10 @@ var Quiz = {
     },
 
     getQuestion: function() {
-   /* Quiz.counter++;
-    Quiz.tries.push(Quiz.counter);
-        var footer = document.createElement("footer"); //creates footer
-        var triesText = document.createElement("p"); //creates tries text area
-        footer.appendChild(triesText);
-        console.log(Quiz.counter);
-        console.log(Quiz.tries.length);*/
-        //triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; 
-
-        /* var attempt;
-         console.log(attempt);
-         Quiz.tries.push(attempt);
-         console.log(Quiz.tries.length);*/
-        var answerArea = document.getElementById("answerSheet").innerHTML="";
+ 
+        var answerArea = document.getElementById("answerSheet");
+        answerArea.innerHTML="";
         
-
-        //Quiz.renderQuiz.triesText.innerHTML="You have tried to answer " + Quiz.tries.length + " times";
-        //var question = document.querySelector("p");
-
 
         //retriev equestion from server
         console.log("you are here");
@@ -155,22 +140,13 @@ var Quiz = {
         
         var counterText = document.createElement("p");
         counterText.innerHTML = "You have answered " + Quiz.tries.length + " times during this quiz";
-        //gets entire container
+       
       
         counterDiv.appendChild(counterText);
-        //var footerDiv = document.createElement("div");//creates footer
-        //var triesText = document.createElement("p"); 
-        
-        //footerDiv.value = "";
-        //triesText.innerHTML = "";
-        //triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; //text tries
-        //console.log(triesText);
-        //var question = document.querySelector("p"); 
+       
         console.log(Quiz.tries.length);
    
-        
-        //footer.appendChild(footerDiv);
-        //footerDiv.appendChild(triesText);
+
        
         console.log(Quiz.triesText);
         var xhr = new XMLHttpRequest();
@@ -197,7 +173,7 @@ var Quiz = {
                 if (xhr.status === 200) {
                     var question = JSON.parse(xhr.responseText);
                     Quiz.url = question.nextURL;
-                    Quiz.clearText();
+                    //Quiz.clearText();
                     Quiz.getQuestion(Quiz.url);
                 }
             }
@@ -218,7 +194,7 @@ var Quiz = {
 
         xhr.send(JSON.stringify(finalAnswer));
 
-
+        Quiz.clearText();
 
     },
     
