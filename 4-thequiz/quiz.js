@@ -15,7 +15,6 @@ var Quiz = {
         Quiz.getQuestion(); //runs getQuestion
         Quiz.renderQuiz(); //runs renderQuiz 
 
-
     },
 
 
@@ -29,21 +28,21 @@ var Quiz = {
         input.setAttribute("placeholder", "Write your answer here: "); 
        
         //sets placeholder
-        var footer = document.createElement("footer"); //creates footer
+       /* var footer = document.createElement("footer"); //creates footer
         var triesText = document.createElement("p"); //creates tries text area
         triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; //text tries
         //console.log(triesText);
         //var question = document.querySelector("p"); 
         var container = document.getElementById("container"); //gets entire container
-        console.log(Quiz.tries.length);
+        console.log(Quiz.tries.length);*/
 
 
 
         questionField.appendChild(newDiv); //adds new div to question field
         newDiv.appendChild(newP); //adds text to new div
 
-        container.appendChild(footer); //adds footer to container
-        footer.appendChild(triesText); //adds tries text 
+        //container.appendChild(footer); //adds footer to container
+        //footer.appendChild(triesText); //adds tries text 
 
         //answerField.appendChild(input);
 
@@ -55,21 +54,21 @@ var Quiz = {
     },
 
     getQuestion: function() {
-    Quiz.counter++;
+   /* Quiz.counter++;
     Quiz.tries.push(Quiz.counter);
         var footer = document.createElement("footer"); //creates footer
         var triesText = document.createElement("p"); //creates tries text area
         footer.appendChild(triesText);
         console.log(Quiz.counter);
-        console.log(Quiz.tries.length);
-        triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; 
+        console.log(Quiz.tries.length);*/
+        //triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; 
 
         /* var attempt;
          console.log(attempt);
          Quiz.tries.push(attempt);
          console.log(Quiz.tries.length);*/
-        var answerArea = document.getElementById("answerSheet");
-        answerArea.innerHTML = "";
+        var answerArea = document.getElementById("answerSheet").innerHTML="";
+        
 
         //Quiz.renderQuiz.triesText.innerHTML="You have tried to answer " + Quiz.tries.length + " times";
         //var question = document.querySelector("p");
@@ -108,12 +107,20 @@ var Quiz = {
                 var pushSend = document.getElementById("send");
                 pushSend.onclick = function() {
                     console.log(pushSend);
-                   
-
-
                     Quiz.sendAnswer(nextUrl);
 
                 };
+                var listenArea = document.getElementById("answerSheet");
+                
+                listenArea.onkeydown = function(e){
+                    if (!e){
+                        e = window.event;
+                    }
+                    if(e.keyCode === 13 && !e.shiftKey){
+                        Quiz.sendAnswer(nextUrl);
+                    }
+                };
+                
             }
         };
 
@@ -138,18 +145,33 @@ var Quiz = {
     },
 
     sendAnswer: function(nextUrl) {
-
-        /*Quiz.counter += 1; //adds counter
+        
+        Quiz.counter++; //adds counter
         console.log(Quiz.counter);
         Quiz.tries.push(Quiz.counter);
-        console.log(Quiz.tries);*/
-
-        // var footer = document.getElementById("footer"); //creates footer
-        //var triesText = document.createElement("p"); //creates tries text area
-
-        //footer.appendChild(triesText);
+        console.log(Quiz.tries);
+        var counterDiv = document.getElementById("counter");
+        counterDiv.innerHTML = "";
+        
+        var counterText = document.createElement("p");
+        counterText.innerHTML = "You have answered " + Quiz.tries.length + " times during this quiz";
+        //gets entire container
+      
+        counterDiv.appendChild(counterText);
+        //var footerDiv = document.createElement("div");//creates footer
+        //var triesText = document.createElement("p"); 
+        
+        //footerDiv.value = "";
         //triesText.innerHTML = "";
-        //Quiz.triesText.innerHTML = "You have tried to complete this quiz in " + Quiz.tries.length + " tries";
+        //triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; //text tries
+        //console.log(triesText);
+        //var question = document.querySelector("p"); 
+        console.log(Quiz.tries.length);
+   
+        
+        //footer.appendChild(footerDiv);
+        //footerDiv.appendChild(triesText);
+       
         console.log(Quiz.triesText);
         var xhr = new XMLHttpRequest();
         console.log("there");

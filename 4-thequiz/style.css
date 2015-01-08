@@ -21,9 +21,14 @@ div {
    
     width: 100%;
     text-align: center;
+}
+    
+footer {
+    text-align: center;
+}
     
    
-}
+
 
 #questionField{
     
