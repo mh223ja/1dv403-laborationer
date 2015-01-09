@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /*global*/
 
 var Quiz = {
@@ -27,37 +27,19 @@ var Quiz = {
         var input = document.getElementById("answerSheet"); //creates input area
         input.setAttribute("placeholder", "Write your answer here: "); 
        
-        //sets placeholder
-       /* var footer = document.createElement("footer"); //creates footer
-        var triesText = document.createElement("p"); //creates tries text area
-        triesText.innerHTML = "You have tried to answer this question with " + Quiz.counter + " tries"; //text tries
-        //console.log(triesText);
-        //var question = document.querySelector("p"); 
-        var container = document.getElementById("container"); //gets entire container
-        console.log(Quiz.tries.length);*/
-
-
-
         questionField.appendChild(newDiv); //adds new div to question field
         newDiv.appendChild(newP); //adds text to new div
 
-        //container.appendChild(footer); //adds footer to container
-        //footer.appendChild(triesText); //adds tries text 
-
-        //answerField.appendChild(input);
-
+    
         //button.addEventListener("click", Quiz.sendAnswer, console.log("PUSH!"));
-
-
-
 
     },
 
     getQuestion: function() {
- 
-        var answerArea = document.getElementById("answerSheet");
-        answerArea.innerHTML="";
-        
+  
+        var answerArea = document.getElementById("answerSheet").innerHTML="";
+
+
 
         //retriev equestion from server
         console.log("you are here");
@@ -74,6 +56,8 @@ var Quiz = {
                 if (xhr.status === 200) {
                     var questionRetrieve = JSON.parse(xhr.responseText);
                     console.log(xhr.responseText);
+                
+                    
                     var question = questionRetrieve.question;
                     console.log(question);
                     var nextUrl = questionRetrieve.nextURL;
@@ -172,8 +156,23 @@ var Quiz = {
                 console.log(xhr.status);
                 if (xhr.status === 200) {
                     var question = JSON.parse(xhr.responseText);
+                    console.log(question);
+                    
                     Quiz.url = question.nextURL;
-                    //Quiz.clearText();
+                    
+                         if (Quiz.url === undefined){
+                        Quiz.quizFinished();
+                    }
+                      else if (question.message === "Correct answer!"){
+                        var response = document.getElementById("answerResponse");
+                        response.innerHTML = "";
+                         var correct = document.createElement("p");
+                         var correctDiv = document.createElement("div");
+                          response.appendChild(correctDiv);
+                          correctDiv.appendChild(correct);
+                          correct.innerHTML = "Correct!";
+                    }
+                    Quiz.clearText();
                     Quiz.getQuestion(Quiz.url);
                 }
             }
@@ -182,19 +181,15 @@ var Quiz = {
         if (xhr.readyState !== 4) {
             if (xhr.status !== 200) {
                 console.log("WRONG!");
-                var wrongAnswer = document.createElement("p");
-                var answerSheet = document.getElementById("answerSheet");
-                answerSheet.innerHTML = "";
-                answerSheet.appendChild(wrongAnswer);
-                wrongAnswer.innerHTML = "Wrong! Please try again";
+                Quiz.wrongAnswer();
 
             }
-
         }
+        
 
         xhr.send(JSON.stringify(finalAnswer));
 
-        Quiz.clearText();
+
 
     },
     
@@ -202,14 +197,29 @@ var Quiz = {
         var textArea = document.getElementById("answerSheet");
         textArea.value = '';
         
-    }
+    
+
+},
+
+wrongAnswer: function() {
+    var wrongDiv = document.getElementById("answerResponse");
+    wrongDiv.innerHTML = "";
+    var wrongText = document.createElement("p");
+    wrongDiv.appendChild(wrongText);
+    wrongText.innerHTML = "Wrong! Enter a new answer";
+    Quiz.clearText();
+    Quiz.getQuestion();
+},
+
+quizFinished: function(){
+    var finishedDiv = document.getElementById("answerResponse");
+    finishedDiv.innerHTML ="";
+    var finishedText = document.createElement("p");
+    finishedDiv.appendChild(finishedText);
+    finishedText.innerHTML = "Congrats, you ARE a genius, you finished the Quiz!";
+}
+
 };
-
-//wrongAnswer: function() {
-
-//}
-
-
 
 
 window.onload = Quiz.init;
